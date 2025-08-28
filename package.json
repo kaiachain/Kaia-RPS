@@ -1,0 +1,44 @@
+{
+  "name": "rps-kaia",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "compile": "TS_NODE_PROJECT=tsconfig.hardhat.json hardhat compile",
+    "deploy": "hardhat run scripts/deploy.cjs --network kaia",
+    "deposit": "hardhat run scripts/deposit.cjs --network kaia",
+    "withdraw": "hardhat run scripts/withdraw.cjs --network kaia",
+    "withdraw:all": "hardhat run scripts/withdraw.cjs --network kaia all"
+  },
+  "dependencies": {
+    "@web3-onboard/injected-wallets": "^2.11.3",
+    "@web3-onboard/react": "^2.11.0",
+    "dotenv": "^17.2.1",
+    "ethers": "^5.7.2",
+    "framer-motion": "^12.23.12",
+    "next": "15.4.6",
+    "react": "19.1.0",
+    "react-confetti": "^6.4.0",
+    "react-dom": "19.1.0",
+    "react-hot-toast": "^2.6.0",
+    "react-spinners": "^0.17.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@nomiclabs/hardhat-ethers": "^2.2.3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.4.6",
+    "hardhat": "^2.26.3",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
+  },
+  "type": "module"
+}
