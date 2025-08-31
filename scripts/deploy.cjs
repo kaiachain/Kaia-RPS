@@ -12,7 +12,7 @@ async function main() {
 
   // Seed house liquidity so commits pass the reservation check
   const [deployer] = await ethers.getSigners();
-  const seedAmount = ethers.utils.parseEther("2"); // adjust as needed
+  const seedAmount = ethers.utils.parseEther("5"); // adjust as needed
   console.log(`Seeding liquidity: ${seedAmount} wei`);
   await (
     await deployer.sendTransaction({ to: address, value: seedAmount })

@@ -203,14 +203,26 @@ export async function getLatestGamesOf(
 
 // Get total number of games played
 export async function getTotalGames(gameContract: ethers.Contract) {
-  const totalGames = await gameContract.totalGames();
-  return totalGames.toString();
+  try {
+    const totalGames = await gameContract.totalGames();
+    return totalGames.toString();
+  } catch (error) {
+    console.error("Error getting total games:", error);
+    // Return "0" if there's an error (likely no games exist yet)
+    return "0";
+  }
 }
 
 // Get reserved house liquidity
 export async function getReservedHouseLiquidity(gameContract: ethers.Contract) {
-  const reservedLiquidity = await gameContract.reservedHouseLiquidity();
-  return ethers.utils.formatEther(reservedLiquidity);
+  try {
+    const reservedLiquidity = await gameContract.reservedHouseLiquidity();
+    return ethers.utils.formatEther(reservedLiquidity);
+  } catch (error) {
+    console.error("Error getting reserved house liquidity:", error);
+    // Return "0" if there's an error
+    return "0";
+  }
 }
 
 // Get total contract balance

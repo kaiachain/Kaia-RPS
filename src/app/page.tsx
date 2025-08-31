@@ -31,6 +31,7 @@ import {
   getWalletButtonText,
   getTokenBalance,
   setupGameContract,
+  getCurrentNetwork,
 } from "../global/utils";
 
 export default function GamePage() {
@@ -157,7 +158,29 @@ export default function GamePage() {
       }
     } catch (error) {
       console.error("Error loading games:", error);
-      toast.error("Failed to load games data");
+
+      // Check if wallet is on wrong network and show switch network button
+      if (wallet && shouldSwitchNetwork(wallet)) {
+        toast.error(
+          (t) => (
+            <div className="flex items-center justify-between gap-3 flex-col">
+              <span className="text-sm font-semibold">Incorrect Network</span>
+              <button
+                onClick={() => {
+                  switchNetwork(wallet);
+                  toast.dismiss(t.id);
+                }}
+                className="bg-[#bff009] text-[#040404] py-1.5 px-4 rounded-2xl hover:bg-[#a8d908] hover:scale-105 transition-all duration-200 ease-in-out cursor-pointer shadow disabled:opacity-50 font-bold text-sm"
+              >
+                Switch to {getCurrentNetwork().name}
+              </button>
+            </div>
+          ),
+          { duration: 6000 }
+        );
+      } else {
+        toast.error("Failed to load games data");
+      }
     } finally {
       setIsLoadingGames(false);
     }

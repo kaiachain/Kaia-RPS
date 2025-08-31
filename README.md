@@ -167,7 +167,6 @@ npx hardhat deploy   # Deploy contracts
 ```bash
 # Deposit KAIA into contract (increase liquidity)
 npm run deposit                    # Default: 10 KAIA
-npm run deposit 50                # Custom amount: 50 KAIA
 
 # Withdraw KAIA from contract (owner only)
 npm run withdraw                   # Withdraw all unreserved liquidity

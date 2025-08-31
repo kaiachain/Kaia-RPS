@@ -5,7 +5,9 @@ async function main() {
 
   // Configuration
   const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_KAIA_GAME_ADDRESS;
-  const DEPOSIT_AMOUNT = process.env.DEPOSIT_AMOUNT || "10"; // Default 10 KAIA
+
+  // Get deposit amount from environment variable if you want to deposit a specific amount
+  const DEPOSIT_AMOUNT = process.env.DEPOSIT_AMOUNT || "10"; // Default 10 KAIA if no environment variable set
 
   if (!CONTRACT_ADDRESS) {
     console.error(
