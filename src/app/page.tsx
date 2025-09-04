@@ -105,10 +105,10 @@ export default function GamePage() {
       console.error("Error checking active game:", error);
       setHasActiveGame(false);
     }
-  }, [gameContract, wallet?.accounts?.[0]?.address]);
+  }, [gameContract, wallet?.accounts]);
 
   // Load games data (with loading state - used for initial load)
-  const loadGamesData = async () => {
+  const loadGamesData = useCallback(async () => {
     if (!gameContract) {
       return;
     }
@@ -184,7 +184,7 @@ export default function GamePage() {
     } finally {
       setIsLoadingGames(false);
     }
-  };
+  }, [gameContract, wallet, checkActiveGame]);
 
   // Set up contract and load games when wallet or contract changes
   useEffect(() => {
@@ -200,17 +200,10 @@ export default function GamePage() {
     if (gameContract) {
       loadGamesData();
     }
-  }, [wallet, gameContract]);
-
-  // Reload games after a successful game (silent refresh)
-  const reloadGamesAfterGame = () => {
-    setTimeout(() => {
-      refreshGamesDataSilently();
-    }, 500); // Wait for transaction to be mined
-  };
+  }, [wallet, gameContract, loadGamesData]);
 
   // Silent refresh that doesn't show loading state (used for post-game updates)
-  const refreshGamesDataSilently = async () => {
+  const refreshGamesDataSilently = useCallback(async () => {
     if (!gameContract) {
       return;
     }
@@ -256,7 +249,14 @@ export default function GamePage() {
       console.error("Error silently refreshing games:", error);
       // Don't show toast for silent refresh errors
     }
-  };
+  }, [gameContract, wallet]);
+
+  // Reload games after a successful game (silent refresh)
+  const reloadGamesAfterGame = useCallback(() => {
+    setTimeout(() => {
+      refreshGamesDataSilently();
+    }, 500); // Wait for transaction to be mined
+  }, [refreshGamesDataSilently]);
 
   // Commit move
   const commitMove = useCallback(async () => {
@@ -298,7 +298,14 @@ export default function GamePage() {
     } finally {
       setIsCommitting(false);
     }
-  }, [gameContract, selectedMove, salt, participationFee]);
+  }, [
+    gameContract,
+    selectedMove,
+    salt,
+    participationFee,
+    checkActiveGame,
+    reloadGamesAfterGame,
+  ]);
 
   // Handle participation fee input validation
   const handleParticipationFeeChange = useCallback(
@@ -464,7 +471,7 @@ export default function GamePage() {
       // ✅ Always reset the loading state, but don't clear inputs on error
       setIsRevealing(false);
     }
-  }, [gameContract, selectedMove, salt]);
+  }, [gameContract, selectedMove, salt, checkActiveGame, reloadGamesAfterGame]);
 
   // Memoized event handlers
   const handleForfeitGame = useCallback(async () => {
@@ -486,7 +493,7 @@ export default function GamePage() {
     } finally {
       setIsForfeiting(false);
     }
-  }, [gameContract]);
+  }, [gameContract, reloadGamesAfterGame]);
 
   return (
     <div className="bg-[#040404] min-h-screen text-white">
