@@ -1,4 +1,4 @@
-name: kaia-safe-react dev-gcp deploy workflow
+name: kaia-rps dev-gcp deploy workflow
 on:
   push:
     branches:
@@ -41,10 +41,10 @@ jobs:
       - name: Build static files
         env:
           NEXT_PUBLIC_ENV: "TESTNET"
-          PRIVATE_KEY:
+          PRIVATE_KEY: 
           KAIA_RPC_URL: https://public-en-kairos.node.kaia.io
           CHAIN_ID: 1001
-          NEXT_PUBLIC_KAIA_GAME_ADDRESS: 0x9D041F08baAdc3636556A646458F0DCdB9E23641
+          NEXT_PUBLIC_KAIA_GAME_ADDRESS: "0x9D041F08baAdc3636556A646458F0DCdB9E23641"
           DEPOSIT_AMOUNT: 10
           NODE_OPTIONS: "--max_old_space_size=8192"
         run: npm run build
