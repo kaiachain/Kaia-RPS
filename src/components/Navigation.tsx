@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import KaiaLogo from "@/assets/kaialogo.png";
 import { useConnectWallet } from "@web3-onboard/react";
 
 interface NavigationProps {
@@ -40,7 +39,7 @@ export default function Navigation({
       <div className="flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center space-x-1">
-          <Image src={KaiaLogo} alt="KAIA Logo" width={60} height={60} />
+          <Image src="/kaialogo.png" alt="KAIA Logo" width={60} height={60} />
           <div className="text-xs font-semibold text-[#bff009] mt-2.5">RPS</div>
         </div>
 

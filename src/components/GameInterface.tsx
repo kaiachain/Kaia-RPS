@@ -4,10 +4,6 @@ import { Move } from "@/global/utils/enums";
 import { BotMoveCard } from "@/components/BotMoveCard";
 import { ClipLoader } from "react-spinners";
 import { generateRandomSalt } from "@/global/utils";
-import RockIcon from "@/assets/rock.png";
-import PaperIcon from "@/assets/paper.png";
-import ScissorsIcon from "@/assets/scissors.png";
-import KAIAIcon from "@/assets/kaia-token.png";
 
 interface GameInterfaceProps {
   // Game state
@@ -119,7 +115,7 @@ export const GameInterface: React.FC<GameInterfaceProps> = ({
           />
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
             <Image
-              src={KAIAIcon}
+              src="/kaia-token.png"
               alt="KAIA"
               width={20}
               height={20}
@@ -165,13 +161,13 @@ export const GameInterface: React.FC<GameInterfaceProps> = ({
               const getMoveImage = (moveKey: string) => {
                 switch (moveKey) {
                   case "Rock":
-                    return RockIcon;
+                    return "/rock.png";
                   case "Paper":
-                    return PaperIcon;
+                    return "/paper.png";
                   case "Scissors":
-                    return ScissorsIcon;
+                    return "/scissors.png";
                   default:
-                    return RockIcon;
+                    return "/rock.png";
                 }
               };
 
