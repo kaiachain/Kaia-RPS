@@ -1,10 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import { ethers } from "ethers";
 import { Move } from "@/global/utils/enums";
 import { BotMoveCard } from "@/components/BotMoveCard";
 import { ClipLoader } from "react-spinners";
-import { getMoveName, generateRandomSalt } from "@/global/utils";
+import { generateRandomSalt } from "@/global/utils";
 import RockIcon from "@/assets/rock.png";
 import PaperIcon from "@/assets/paper.png";
 import ScissorsIcon from "@/assets/scissors.png";
@@ -50,8 +49,6 @@ export const GameInterface: React.FC<GameInterfaceProps> = ({
   isForfeiting,
   walletBalance,
   lastResult,
-  reservedLiquidity,
-  contractBalance,
   onMoveSelect,
   onSaltChange,
   onParticipationFeeChange,

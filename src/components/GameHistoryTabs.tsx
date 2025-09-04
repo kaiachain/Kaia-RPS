@@ -102,7 +102,7 @@ export const GameHistoryTabs: React.FC<GameHistoryTabsProps> = ({
                 </div>
               ) : playerGames.length > 0 ? (
                 <div className="space-y-2 max-h-[400px] overflow-y-auto">
-                  {memoizedPlayerGames.map((game, index) => (
+                  {memoizedPlayerGames.map((game) => (
                     <div
                       key={game.id}
                       className={`p-3 rounded-lg relative cursor-pointer transition-all duration-200 ${
@@ -203,7 +203,7 @@ export const GameHistoryTabs: React.FC<GameHistoryTabsProps> = ({
                 </div>
               ) : globalGames.length > 0 ? (
                 <div className="space-y-2 max-h-[400px] overflow-y-auto">
-                  {memoizedGlobalGames.map((game, index) => (
+                  {memoizedGlobalGames.map((game) => (
                     <div
                       key={game.id}
                       className={`p-3 rounded-lg relative cursor-pointer transition-all duration-200 ${
