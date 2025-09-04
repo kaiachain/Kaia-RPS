@@ -3,10 +3,6 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import BotGif from "@/assets/bot.gif";
-import RockIcon from "@/assets/rock.png";
-import PaperIcon from "@/assets/paper.png";
-import ScissorsIcon from "@/assets/scissors.png";
 
 interface BotMoveCardProps {
   move: string | null;
@@ -27,21 +23,21 @@ export const BotMoveCard: React.FC<BotMoveCardProps> = ({
     if (typeof moveNumber === "string") {
       switch (moveNumber) {
         case "Rock":
-          return RockIcon;
+          return "/rock.png";
         case "Paper":
-          return PaperIcon;
+          return "/paper.png";
         case "Scissors":
-          return ScissorsIcon;
+          return "/scissors.png";
         default:
           // Try parsing as number
           const moveNum = parseInt(moveNumber);
           switch (moveNum) {
             case 1:
-              return RockIcon;
+              return "/rock.png";
             case 2:
-              return PaperIcon;
+              return "/paper.png";
             case 3:
-              return ScissorsIcon;
+              return "/scissors.png";
             default:
               return null;
           }
@@ -50,11 +46,11 @@ export const BotMoveCard: React.FC<BotMoveCardProps> = ({
       // Handle number format
       switch (moveNumber) {
         case 1:
-          return RockIcon;
+          return "/rock.png";
         case 2:
-          return PaperIcon;
+          return "/paper.png";
         case 3:
-          return ScissorsIcon;
+          return "/scissors.png";
         default:
           return null;
       }
@@ -116,7 +112,7 @@ export const BotMoveCard: React.FC<BotMoveCardProps> = ({
           />
         ) : (
           <Image
-            src={BotGif}
+            src="/bot.gif"
             alt="Bot thinking"
             width={96}
             height={96}

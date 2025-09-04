@@ -22,9 +22,6 @@ import Confetti from "react-confetti";
 import { useConnectWallet } from "@web3-onboard/react";
 
 import { Move } from "@/global/utils/enums";
-import RockIcon from "@/assets/rock.png";
-import PaperIcon from "@/assets/paper.png";
-import ScissorsIcon from "@/assets/scissors.png";
 import {
   switchNetwork,
   shouldSwitchNetwork,
@@ -74,13 +71,13 @@ export default function GamePage() {
   const getMoveImage = (moveName: string) => {
     switch (moveName) {
       case "Rock":
-        return RockIcon;
+        return "/rock.png";
       case "Paper":
-        return PaperIcon;
+        return "/paper.png";
       case "Scissors":
-        return ScissorsIcon;
+        return "/scissors.png";
       default:
-        return RockIcon;
+        return "/rock.png";
     }
   };
 
