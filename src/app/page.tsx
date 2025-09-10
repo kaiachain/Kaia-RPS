@@ -15,6 +15,7 @@ import {
 import { ContractStats } from "@/components/ContractStats";
 import { GameHistoryTabs } from "@/components/GameHistoryTabs";
 import { GameInterface } from "@/components/GameInterface";
+import { OutcomeFeedbackModal } from "@/components/OutcomeFeedbackModal";
 import Navigation from "@/components/Navigation";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
@@ -29,6 +30,7 @@ import {
   getTokenBalance,
   setupGameContract,
   getCurrentNetwork,
+  getMoveImage,
 } from "../global/utils";
 
 export default function GamePage() {
@@ -66,20 +68,6 @@ export default function GamePage() {
 
   // Connect wallet using Web3Onboard
   const [{ wallet }, connect] = useConnectWallet();
-
-  // Helper function to get move image
-  const getMoveImage = (moveName: string) => {
-    switch (moveName) {
-      case "Rock":
-        return "/rock.png";
-      case "Paper":
-        return "/paper.png";
-      case "Scissors":
-        return "/scissors.png";
-      default:
-        return "/rock.png";
-    }
-  };
 
   // Set page as loaded after initial render
   useEffect(() => {
@@ -499,72 +487,10 @@ export default function GamePage() {
       )}
 
       {/* Outcome Feedback Overlay */}
-      {showOutcomeFeedback.type && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
-          <div
-            className={`px-8 py-6 rounded-lg text-2xl font-bold text-white shadow-2xl transform transition-all duration-500 flex flex-col items-center gap-4 bg-gray-800 border-2 ${
-              isFadingOut ? "animate-fade-out" : "animate-scale-in"
-            } ${
-              showOutcomeFeedback.type === "win"
-                ? "border-[#bff009]"
-                : showOutcomeFeedback.type === "lose"
-                  ? "border-red-500"
-                  : "border-yellow-500"
-            }`}
-          >
-            <div className="text-center">{showOutcomeFeedback.message}</div>
-
-            {/* Prize Money Display */}
-            {showOutcomeFeedback.prizeMoney && (
-              <div className="text-center text-lg font-bold text-[#bff009]">
-                Prize: {showOutcomeFeedback.prizeMoney} KAIA
-              </div>
-            )}
-
-            {/* Move Images */}
-            {showOutcomeFeedback.playerMove && showOutcomeFeedback.botMove && (
-              <div className="flex items-center gap-6">
-                {/* Player Move */}
-                <div className="flex flex-col items-center">
-                  <div className="text-sm font-medium mb-2">You</div>
-                  <div className="w-16 h-16 rounded-lg bg-white/20 flex items-center justify-center">
-                    <Image
-                      src={getMoveImage(showOutcomeFeedback.playerMove)}
-                      alt={showOutcomeFeedback.playerMove}
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover invert brightness-0"
-                    />
-                  </div>
-                  <div className="text-sm mt-1">
-                    {showOutcomeFeedback.playerMove}
-                  </div>
-                </div>
-
-                {/* VS */}
-                <div className="text-xl font-bold">VS</div>
-
-                {/* Bot Move */}
-                <div className="flex flex-col items-center">
-                  <div className="text-sm font-medium mb-2">Bot</div>
-                  <div className="w-16 h-16 rounded-lg bg-white/20 flex items-center justify-center">
-                    <Image
-                      src={getMoveImage(showOutcomeFeedback.botMove)}
-                      alt={showOutcomeFeedback.botMove}
-                      width={48}
-                      height={48}
-                      className="w-full h-full object-cover invert brightness-0"
-                    />
-                  </div>
-                  <div className="text-sm mt-1">
-                    {showOutcomeFeedback.botMove}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <OutcomeFeedbackModal
+        showOutcomeFeedback={showOutcomeFeedback}
+        isFadingOut={isFadingOut}
+      />
 
       <Navigation
         shouldSwitchNetwork={shouldSwitchNetwork}

@@ -167,3 +167,17 @@ export function isGameForfeited(game: any): boolean {
     game.revealBlock !== "0" // Has been revealed/forfeited
   );
 }
+
+// Helper function to get move image
+export function getMoveImage(moveName: string): string {
+  switch (moveName) {
+    case "Rock":
+      return "/rock.png";
+    case "Paper":
+      return "/paper.png";
+    case "Scissors":
+      return "/scissors.png";
+    default:
+      return "/rock.png";
+  }
+}
